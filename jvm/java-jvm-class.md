@@ -133,7 +133,7 @@ constant_pool[constant_pool_count]
 ```
 
 #### 常量池中的表
-![Alt text](../images/jvm/java-jvm-constant-pool.png)
+![Alt text](./images/jvm/java-jvm-constant-pool.png)
 
 
 ##### CONSTANT_Utf8_info 表 结构
@@ -286,8 +286,8 @@ constant_pool[constant_pool_count]
 |ACC_ENUM |0x4000 	|标识枚举类型|
 |ACC_MODULE |0x8000 	|标识模块|
 
-![Alt text](../images/jvm/访问标志.png)
-![Alt text](../images/jvm/访问标志_2.png)
+![Alt text](./images/jvm/访问标志.png)
+![Alt text](./images/jvm/访问标志_2.png)
 
 
 ### 类索引

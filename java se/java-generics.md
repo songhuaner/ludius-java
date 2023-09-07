@@ -13,7 +13,7 @@ class A<T>{
 ```
 #### 继承泛型类
 
-
+PECS原则：Producer-Extends, Consumer-Super。
 ### 泛型接口
 
 ### 泛型方法
