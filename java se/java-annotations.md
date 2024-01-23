@@ -17,6 +17,87 @@ public interface Annotation {
 }
 
 ```
+
+```
+package annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE_USE, ElementType.METHOD})
+public @interface A {
+    
+    String value() default "T";
+
+    String value1() default "T1";
+}
+```
+
+
+```
+Compiled from "A.java"
+public interface annotation.A extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+  public abstract java.lang.String value1();
+}
+
+```
+
+```
+Classfile /D:/workspace-vscode/ludius_annotate/bin/annotation/A.class
+  Last modified 2023-9-6; size 477 bytes
+  MD5 checksum 7f860c01998b81cae4b9d3db3ad2cade
+  Compiled from "A.java"
+public interface annotation.A extends java.lang.annotation.Annotation
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT, ACC_ANNOTATION
+Constant pool:
+   #1 = Class              #2             // annotation/A
+   #2 = Utf8               annotation/A
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Class              #6             // java/lang/annotation/Annotation
+   #6 = Utf8               java/lang/annotation/Annotation
+   #7 = Utf8               value
+   #8 = Utf8               ()Ljava/lang/String;
+   #9 = Utf8               AnnotationDefault
+  #10 = Utf8               T
+  #11 = Utf8               value1
+  #12 = Utf8               T1
+  #13 = Utf8               SourceFile
+  #14 = Utf8               A.java
+  #15 = Utf8               RuntimeVisibleAnnotations
+  #16 = Utf8               Ljava/lang/annotation/Retention;
+  #17 = Utf8               Ljava/lang/annotation/RetentionPolicy;
+  #18 = Utf8               RUNTIME
+  #19 = Utf8               Ljava/lang/annotation/Target;
+  #20 = Utf8               Ljava/lang/annotation/ElementType;
+  #21 = Utf8               TYPE_USE
+  #22 = Utf8               METHOD
+{
+  public abstract java.lang.String value();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC, ACC_ABSTRACT
+    AnnotationDefault:
+      default_value: s#10
+  public abstract java.lang.String value1();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC, ACC_ABSTRACT
+    AnnotationDefault:
+      default_value: s#12}
+SourceFile: "A.java"
+RuntimeVisibleAnnotations:
+  0: #16(#7=e#17.#18)
+  1: #19(#7=[e#20.#21,e#20.#22])
+```
+
+
+
+
 ## 分类
 - 标准注解
 - 元注解
@@ -128,9 +209,6 @@ public @interface 注解名 {
 - Annotation
 - 以上所有类型的数组类型
 
-### 注解的原理
-注解本质是一个继承了Annotation 的特殊接口，其具体实现类是Java 运行时生成的动态代理类。而我们通过反射获取注解时，返回的是Java 运行时生成的动态代理对象$Proxy1。通过代理对象调用自定义注解（接口）的方法，会最终调用AnnotationInvocationHandler 的invoke方法。该方法会从memberValues 这个Map 中索引出对应的值。而memberValues 的来源是Java 常量池。
-
 
 ### jvm class文件中的注解
 - since1.5
@@ -186,3 +264,5 @@ Annotation[] getDeclaredAnnotations();
 
 
 
+### 注解的原理
+注解本质是一个继承了Annotation 的特殊接口，其具体实现类是Java 运行时生成的动态代理类。而我们通过反射获取注解时，返回的是Java 运行时生成的动态代理对象$Proxy1。通过代理对象调用自定义注解（接口）的方法，会最终调用AnnotationInvocationHandler 的invoke方法。该方法会从memberValues 这个Map 中索引出对应的值。而memberValues 的来源是Java 常量池。
