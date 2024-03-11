@@ -48,7 +48,6 @@ public interface Supplier<T> |供应者  |
 ```
 @FunctionalInterface
 public interface Supplier<T> {
-
     /**
      * 只有这一个抽象类
      */
@@ -154,3 +153,4 @@ public interface Function<T, R> {
     }
 }
 ```
+
